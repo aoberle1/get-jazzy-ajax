@@ -3,52 +3,26 @@ const express = require('express');
 const app = express();
 const PORT = 5000;
 
-const artistListArray = [
-    {
-        name: 'Miles Davis',
-        born: 1926,
-        died: 1990,
-    },
-    {
-        name: 'Duke Ellington',
-        born: 1899,
-        died: 1974,
-    },
-    {
-        name: 'John Coltrane',
-        born: 1926,
-        died: 1987,
-    },
-    {
-        name: 'Louis Daniel Armstrong',
-        born: 1901,
-        died: 1971,
-    },
-];
+const artistListArray = require('./modules/artist.js');
 
-const songListArray = [
-    {
-        title: 'Take Five',
-        artist: 'The Dave Brubeck Quartet',
-    },
-    {
-        title: 'So What',
-        artist: 'Miles Davis',
-    },
-    {
-        title: 'Sing Sing Sing',
-        artist: 'Benny Goodman',
-    },
-    {
-        title: 'Take the "A" Train',
-        artist: 'The Dave Brubeck Quartet',
-    },
-];
+const songListArray = require('./modules/song.js');
+
+const albumListArray = require('./modules/album.js')
 
 app.use(express.static('server/public'));
 
+// .get sends a request to the server for data on /artist page
 app.get('/artist', (req, res) => {
+    // response from server, sending artistListArray back to client
     res.send(artistListArray);
+});
+
+app.get('/song', (req, res) => {
+    res.send(songListArray)
+});
+
+app.get('/album', (req, res) => {
+    res.send(albumListArray)
 });
 
 // TODO - Add GET for songs
